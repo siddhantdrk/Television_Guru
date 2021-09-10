@@ -12,27 +12,25 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.app.televisionguru.R;
 import com.app.televisionguru.databinding.FragmentHomeBinding;
 
-public class HomeFragment extends Fragment {
+public class AnimsFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private AnimsViewModel animsViewModel;
     private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        animsViewModel =
+                new ViewModelProvider(this).get(AnimsViewModel.class);
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        animsViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+
             }
         });
         return root;

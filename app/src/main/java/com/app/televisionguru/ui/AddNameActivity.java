@@ -2,6 +2,7 @@ package com.app.televisionguru.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.app.televisionguru.room.DatabaseClient;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class AddNameActivity extends AppCompatActivity {
 
@@ -38,7 +40,8 @@ public class AddNameActivity extends AppCompatActivity {
         sp_types = findViewById(R.id.sp_types);
         etName = findViewById(R.id.etName);
 
-
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, type_list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_types.setAdapter(adapter);

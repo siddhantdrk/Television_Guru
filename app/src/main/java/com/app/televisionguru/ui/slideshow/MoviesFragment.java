@@ -12,27 +12,24 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.app.televisionguru.R;
 import com.app.televisionguru.databinding.FragmentSlideshowBinding;
 
-public class SlideshowFragment extends Fragment {
+public class MoviesFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
+    private MoviesViewModel moviesViewModel;
     private FragmentSlideshowBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        moviesViewModel =
+                new ViewModelProvider(this).get(MoviesViewModel.class);
 
         binding = FragmentSlideshowBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        moviesViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
             }
         });
         return root;

@@ -12,27 +12,25 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.app.televisionguru.R;
 import com.app.televisionguru.databinding.FragmentGalleryBinding;
 
-public class GalleryFragment extends Fragment {
+public class TelevisionFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
+    private TelevisionViewModel televisionViewModel;
     private FragmentGalleryBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                new ViewModelProvider(this).get(GalleryViewModel.class);
+        televisionViewModel =
+                new ViewModelProvider(this).get(TelevisionViewModel.class);
 
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textGallery;
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        televisionViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                //textView.setText(s);
             }
         });
         return root;
