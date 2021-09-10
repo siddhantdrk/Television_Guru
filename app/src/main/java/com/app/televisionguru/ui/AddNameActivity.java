@@ -40,8 +40,6 @@ public class AddNameActivity extends AppCompatActivity {
         sp_types = findViewById(R.id.sp_types);
         etName = findViewById(R.id.etName);
 
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
         ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, type_list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_types.setAdapter(adapter);

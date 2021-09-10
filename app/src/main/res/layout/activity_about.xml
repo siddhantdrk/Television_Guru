@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".ui.AboutActivity">
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/pink_lavender"
+        app:title="@string/about"
+        app:navigationIcon="@drawable/ic_baseline_keyboard_backspace_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:titleTextColor="@color/white"
+        app:titleCentered="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
