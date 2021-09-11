@@ -18,6 +18,17 @@ public class Task {
     @ColumnInfo(name = "type")
     private String type;
 
+    @ColumnInfo(name = "isVisible")
+    private boolean isVisible;
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
+    }
+
     public String getType() {
         return type;
     }

@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.app.televisionguru.R;
 import com.app.televisionguru.dao.Task;
 import com.app.televisionguru.room.DatabaseClient;
+import com.google.android.material.appbar.MaterialToolbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,7 @@ public class AddNameActivity extends AppCompatActivity {
         sp_types = findViewById(R.id.sp_types);
         etName = findViewById(R.id.etName);
 
+        ((MaterialToolbar) findViewById(R.id.toolbar)).setNavigationOnClickListener(view -> finish());
         ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, type_list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_types.setAdapter(adapter);
@@ -76,6 +78,7 @@ public class AddNameActivity extends AppCompatActivity {
             Task task = new Task();
             task.setName(etName.getText().toString());
             task.setType(selectedItem);
+            task.setVisible(false);
             DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                     .taskDao()
                     .insert(task);
