@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.app.televisionguru.MainActivity;
 import com.app.televisionguru.dao.Task;
 import com.app.televisionguru.databinding.FragmentGalleryBinding;
 import com.app.televisionguru.room.AppExecutors;
@@ -43,6 +44,14 @@ public class TelevisionFragment extends Fragment implements HomeItemListner {
         homeListAdapter = new HomeListAdapter(getActivity(), mTasks, this);
         binding.rvTelevision.setAdapter(homeListAdapter);
         getData(false, getActivity());
+
+        ((MainActivity) getActivity()).passTelevisionVal(() -> DatabaseClient.getInstance(getActivity().getApplicationContext()).getAppDatabase()
+                .taskDao()
+                .getAllByAscendingOrder("Television").observe(getViewLifecycleOwner(), tasks -> {
+                    mTasks.clear();
+                    mTasks.addAll(tasks);
+                    homeListAdapter.notifyDataSetChanged();
+                }));
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             @Override

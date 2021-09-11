@@ -21,6 +21,9 @@ import com.app.televisionguru.room.AppExecutors;
 import com.app.televisionguru.room.DatabaseClient;
 import com.app.televisionguru.ui.AboutActivity;
 import com.app.televisionguru.ui.AddNameActivity;
+import com.app.televisionguru.ui.AnimInterface;
+import com.app.televisionguru.ui.MoviesInterface;
+import com.app.televisionguru.ui.TelevisionInterface;
 import com.app.televisionguru.ui.gallery.TelevisionFragment;
 import com.app.televisionguru.ui.home.AnimsFragment;
 import com.app.televisionguru.ui.slideshow.MoviesFragment;
@@ -35,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     int bottomBarSelectedIndex = 0;
     DrawerLayout drawer;
     Fragment selectedFragment = new AnimsFragment();
+    AnimInterface animInterface;
+    TelevisionInterface televisionInterface;
+    MoviesInterface moviesInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +61,12 @@ public class MainActivity extends AppCompatActivity {
         navigationView.addShuffle.setOnClickListener(view -> shuffleAndGetTask(view));
         navigationView.addSort.setOnClickListener(view -> {
             drawer.close();
-           /* if (bottomBarSelectedIndex == 0) ((AnimsFragment) selectedFragment).getData(true, MainActivity.this);
-            else if (bottomBarSelectedIndex == 1)
-                ((MoviesFragment) selectedFragment).getData(true, MainActivity.this);
+            if (bottomBarSelectedIndex == 0) {
+                animInterface.getSortedData();
+            } else if (bottomBarSelectedIndex == 1)
+                moviesInterface.getSortedData();
             else if (bottomBarSelectedIndex == 2)
-                ((TelevisionFragment) selectedFragment).getData(true, MainActivity.this);
-      */
+                televisionInterface.getSortedData();
         });
 
         navigationView.addClear.setOnClickListener(new View.OnClickListener() {
@@ -165,5 +171,17 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
 
+    }
+
+    public void passAnimVal(AnimInterface animInterface) {
+        this.animInterface = animInterface;
+    }
+
+    public void passMoviesVal(MoviesInterface moviesInterface) {
+        this.moviesInterface = moviesInterface;
+    }
+
+    public void passTelevisionVal(TelevisionInterface televisionInterface) {
+        this.televisionInterface = televisionInterface;
     }
 }

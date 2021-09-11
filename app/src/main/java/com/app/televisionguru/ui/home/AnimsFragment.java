@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.app.televisionguru.MainActivity;
 import com.app.televisionguru.dao.Task;
 import com.app.televisionguru.databinding.FragmentHomeBinding;
 import com.app.televisionguru.room.AppDatabase;
 import com.app.televisionguru.room.AppExecutors;
 import com.app.televisionguru.room.DatabaseClient;
+import com.app.televisionguru.ui.AnimInterface;
 import com.app.televisionguru.ui.HomeItemListner;
 import com.app.televisionguru.ui.adapter.HomeListAdapter;
 
@@ -37,6 +39,14 @@ public class AnimsFragment extends Fragment implements HomeItemListner {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        ((MainActivity) getActivity()).passAnimVal(() -> DatabaseClient.getInstance(getActivity().getApplicationContext()).getAppDatabase()
+                .taskDao()
+                .getAllByAscendingOrder("Anime's").observe(getViewLifecycleOwner(), tasks -> {
+                    mTasks.clear();
+                    mTasks.addAll(tasks);
+                    homeListAdapter.notifyDataSetChanged();
+                }));
 
         binding.rvAnims.setLayoutManager(new LinearLayoutManager(getActivity()));
         homeListAdapter = new HomeListAdapter(getActivity(), mTasks, this);
