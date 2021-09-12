@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -89,7 +90,9 @@ public class AddNameActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             finish();
-            Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG).show();
+            Toast toast = Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.BOTTOM, 0, 250);
+            toast.show();
         }
     }
 

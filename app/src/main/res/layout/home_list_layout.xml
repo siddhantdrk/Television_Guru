@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="12dp"
+            android:textSize="16sp"
             android:text="Hello World!!"
             android:textColor="@color/black" />
 
@@ -46,4 +47,11 @@
             android:src="@drawable/ic_baseline_visibility_off_24" />
 
     </LinearLayout>
+
+    <View
+        android:layout_gravity="bottom"
+        android:background="#e3e3e3"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"/>
+
 </FrameLayout>

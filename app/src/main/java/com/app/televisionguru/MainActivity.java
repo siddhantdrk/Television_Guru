@@ -84,8 +84,10 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
-        navigationView.addName.setOnClickListener(view ->
-                startActivity(new Intent(MainActivity.this, AddNameActivity.class)));
+        navigationView.addName.setOnClickListener(view -> {
+            drawer.close();
+            startActivity(new Intent(MainActivity.this, AddNameActivity.class));
+        });
         BottomNavigationView bottomNav = findViewById(R.id.bottomNavigationView);
         tvName = findViewById(R.id.tvName);
         bottomNav.setOnItemSelectedListener(navListener);
