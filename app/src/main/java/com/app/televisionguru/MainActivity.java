@@ -1,5 +1,7 @@
 package com.app.televisionguru;
 
+import static java.util.Collections.reverse;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.app.televisionguru.dao.Task;
@@ -29,6 +32,11 @@ import com.app.televisionguru.ui.home.AnimsFragment;
 import com.app.televisionguru.ui.slideshow.MoviesFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,12 +69,20 @@ public class MainActivity extends AppCompatActivity {
         navigationView.addShuffle.setOnClickListener(view -> shuffleAndGetTask(view));
         navigationView.addSort.setOnClickListener(view -> {
             drawer.close();
-            if (bottomBarSelectedIndex == 0) {
-                animInterface.getSortedData();
-            } else if (bottomBarSelectedIndex == 1)
-                moviesInterface.getSortedData();
-            else if (bottomBarSelectedIndex == 2)
-                televisionInterface.getSortedData();
+            AppExecutors.getInstance().diskIO().execute(() -> {
+                List<Task> tasks = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                        .taskDao()
+                        .getAllByType(bottomBarSelectedIndex == 0 ? "Anime" :
+                                bottomBarSelectedIndex == 1 ? "Movies" : "Television");
+                for (int a = 0; a< tasks.size(); a++){
+                    tasks.get(a).setId(0);
+                }
+                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                        .taskDao().deleteAll(bottomBarSelectedIndex == 0 ? "Anime" :
+                        bottomBarSelectedIndex == 1 ? "Movies" : "Television");
+                DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                        .taskDao().insertAll(tasks);
+            });
         });
 
         navigationView.addClear.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-                                .taskDao().deleteAll(bottomBarSelectedIndex == 0 ? "Anime's" :
+                                .taskDao().deleteAll(bottomBarSelectedIndex == 0 ? "Anime" :
                                 bottomBarSelectedIndex == 1 ? "Movies" : "Television");
                     }
                 });
@@ -101,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         tvName.setText("");
         AppExecutors.getInstance().diskIO().execute(() -> {
             Task tasks = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-                    .taskDao().getRandomTask(bottomBarSelectedIndex == 0 ? "Anime's" :
+                    .taskDao().getRandomTask(bottomBarSelectedIndex == 0 ? "Anime" :
                             bottomBarSelectedIndex == 1 ? "Movies" : "Television");
             AppExecutors.getInstance().mainThread().execute(new Runnable() {
                 @Override

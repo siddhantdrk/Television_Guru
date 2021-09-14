@@ -4,7 +4,7 @@
         android:id="@+id/animes"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_movie_24"
-        android:title="Anime's" />
+        android:title="Anime" />
     <item
         android:id="@+id/movies"
         android:enabled="true"

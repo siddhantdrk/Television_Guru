@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -15,6 +16,8 @@ public interface TaskDao {
     @Query("SELECT * FROM task where type = :type")
     LiveData<List<Task>> getAll(String type);
 
+    @Query("SELECT * FROM task where type = :type ORDER BY name ASC")
+    List<Task> getAllByType(String type);
 
     @Query("SELECT * FROM task where type = :type ORDER BY name ASC")
     LiveData<List<Task>> getAllByAscendingOrder(String type);
@@ -25,9 +28,11 @@ public interface TaskDao {
     @Insert
     void insert(Task task);
 
+    @Insert
+    void insertAll(List<Task> task);
+
     @Delete
     void delete(Task task);
-
 
     @Query("Delete from task where type =:type")
     int deleteAll(String type);
