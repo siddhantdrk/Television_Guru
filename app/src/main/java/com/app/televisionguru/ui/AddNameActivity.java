@@ -37,7 +37,7 @@ public class AddNameActivity extends AppCompatActivity {
 
         type_list.add("Animes");
         type_list.add("Movies");
-        type_list.add("Television");
+        type_list.add("Television Shows");
 
         sp_types = findViewById(R.id.sp_types);
         etName = findViewById(R.id.etName);

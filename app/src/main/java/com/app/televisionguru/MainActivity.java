@@ -73,13 +73,13 @@ public class MainActivity extends AppCompatActivity {
                 List<Task> tasks = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                         .taskDao()
                         .getAllByType(bottomBarSelectedIndex == 0 ? "Animes" :
-                                bottomBarSelectedIndex == 1 ? "Movies" : "Television");
+                                bottomBarSelectedIndex == 1 ? "Movies" : "Television Shows");
                 for (int a = 0; a< tasks.size(); a++){
                     tasks.get(a).setId(0);
                 }
                 DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                         .taskDao().deleteAll(bottomBarSelectedIndex == 0 ? "Animes" :
-                        bottomBarSelectedIndex == 1 ? "Movies" : "Television");
+                        bottomBarSelectedIndex == 1 ? "Movies" : "Television Shows");
                 DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                         .taskDao().insertAll(tasks);
             });
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                         DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                                 .taskDao().deleteAll(bottomBarSelectedIndex == 0 ? "Animes" :
-                                bottomBarSelectedIndex == 1 ? "Movies" : "Television");
+                                bottomBarSelectedIndex == 1 ? "Movies" : "Television Shows");
                     }
                 });
             }
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         AppExecutors.getInstance().diskIO().execute(() -> {
             Task tasks = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                     .taskDao().getRandomTask(bottomBarSelectedIndex == 0 ? "Animes" :
-                            bottomBarSelectedIndex == 1 ? "Movies" : "Television");
+                            bottomBarSelectedIndex == 1 ? "Movies" : "Television Shows");
             AppExecutors.getInstance().mainThread().execute(new Runnable() {
                 @Override
                 public void run() {

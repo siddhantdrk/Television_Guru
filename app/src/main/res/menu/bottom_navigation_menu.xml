@@ -15,5 +15,5 @@
         android:id="@+id/television"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_tv_24"
-        android:title="Television" />
+        android:title="Television Shows" />
 </menu>

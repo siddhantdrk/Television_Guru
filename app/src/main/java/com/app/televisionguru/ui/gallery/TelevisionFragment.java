@@ -47,7 +47,7 @@ public class TelevisionFragment extends Fragment implements HomeItemListner {
 
         ((MainActivity) getActivity()).passTelevisionVal(() -> DatabaseClient.getInstance(getActivity().getApplicationContext()).getAppDatabase()
                 .taskDao()
-                .getAllByAscendingOrder("Television").observe(getViewLifecycleOwner(), tasks -> {
+                .getAllByAscendingOrder("Television Shows").observe(getViewLifecycleOwner(), tasks -> {
                     mTasks.clear();
                     mTasks.addAll(tasks);
                     homeListAdapter.notifyDataSetChanged();
@@ -111,7 +111,7 @@ public class TelevisionFragment extends Fragment implements HomeItemListner {
     public void getData(boolean sort, Activity mainActivity) {
         DatabaseClient.getInstance(getActivity().getApplicationContext()).getAppDatabase()
                 .taskDao()
-                .getAll("Television").observe(getViewLifecycleOwner(), tasks -> {
+                .getAll("Television Shows").observe(getViewLifecycleOwner(), tasks -> {
             mTasks.clear();
             mTasks.addAll(tasks);
             homeListAdapter.notifyDataSetChanged();
