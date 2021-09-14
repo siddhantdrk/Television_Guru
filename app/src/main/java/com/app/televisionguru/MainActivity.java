@@ -72,13 +72,13 @@ public class MainActivity extends AppCompatActivity {
             AppExecutors.getInstance().diskIO().execute(() -> {
                 List<Task> tasks = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                         .taskDao()
-                        .getAllByType(bottomBarSelectedIndex == 0 ? "Anime" :
+                        .getAllByType(bottomBarSelectedIndex == 0 ? "Animes" :
                                 bottomBarSelectedIndex == 1 ? "Movies" : "Television");
                 for (int a = 0; a< tasks.size(); a++){
                     tasks.get(a).setId(0);
                 }
                 DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-                        .taskDao().deleteAll(bottomBarSelectedIndex == 0 ? "Anime" :
+                        .taskDao().deleteAll(bottomBarSelectedIndex == 0 ? "Animes" :
                         bottomBarSelectedIndex == 1 ? "Movies" : "Television");
                 DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
                         .taskDao().insertAll(tasks);
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-                                .taskDao().deleteAll(bottomBarSelectedIndex == 0 ? "Anime" :
+                                .taskDao().deleteAll(bottomBarSelectedIndex == 0 ? "Animes" :
                                 bottomBarSelectedIndex == 1 ? "Movies" : "Television");
                     }
                 });
@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
         tvName.setText("");
         AppExecutors.getInstance().diskIO().execute(() -> {
             Task tasks = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
-                    .taskDao().getRandomTask(bottomBarSelectedIndex == 0 ? "Anime" :
+                    .taskDao().getRandomTask(bottomBarSelectedIndex == 0 ? "Animes" :
                             bottomBarSelectedIndex == 1 ? "Movies" : "Television");
             AppExecutors.getInstance().mainThread().execute(new Runnable() {
                 @Override
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView.OnItemSelectedListener navListener = item -> {
         switch (item.getItemId()) {
-            case R.id.animes:
+            case R.id.Animess:
                 bottomBarSelectedIndex = 0;
                 selectedFragment = new AnimsFragment();
                 break;

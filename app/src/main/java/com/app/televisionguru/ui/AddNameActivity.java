@@ -28,14 +28,14 @@ public class AddNameActivity extends AppCompatActivity {
     private AppCompatSpinner sp_types;
     EditText etName;
     private ArrayList<String> type_list = new ArrayList<>();
-    String selectedItem = "Anime";
+    String selectedItem = "Animes";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_name);
 
-        type_list.add("Anime");
+        type_list.add("Animes");
         type_list.add("Movies");
         type_list.add("Television");
 

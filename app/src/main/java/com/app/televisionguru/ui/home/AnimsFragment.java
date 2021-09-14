@@ -42,7 +42,7 @@ public class AnimsFragment extends Fragment implements HomeItemListner {
 
         ((MainActivity) getActivity()).passAnimVal(() -> DatabaseClient.getInstance(getActivity().getApplicationContext()).getAppDatabase()
                 .taskDao()
-                .getAllByAscendingOrder("Anime").observe(getViewLifecycleOwner(), tasks -> {
+                .getAllByAscendingOrder("Animes").observe(getViewLifecycleOwner(), tasks -> {
                     mTasks.clear();
                     mTasks.addAll(tasks);
                     homeListAdapter.notifyDataSetChanged();
@@ -139,7 +139,7 @@ public class AnimsFragment extends Fragment implements HomeItemListner {
     public void getData(boolean sort, Activity activity) {
         DatabaseClient.getInstance(getActivity().getApplicationContext()).getAppDatabase()
                 .taskDao()
-                .getAll("Anime").observe(getViewLifecycleOwner(), tasks -> {
+                .getAll("Animes").observe(getViewLifecycleOwner(), tasks -> {
             mTasks.clear();
             mTasks.addAll(tasks);
             homeListAdapter.notifyDataSetChanged();
