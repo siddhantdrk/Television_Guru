@@ -1,7 +1,5 @@
 package com.app.televisionguru;
 
-import static java.util.Collections.reverse;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.app.televisionguru.dao.Task;
@@ -33,9 +30,6 @@ import com.app.televisionguru.ui.slideshow.MoviesFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -130,6 +124,21 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
+        });
+
+        AppExecutors.getInstance().diskIO().execute(() -> {
+            List<Task> tasks = DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                    .taskDao()
+                    .getAllRandomByType(bottomBarSelectedIndex == 0 ? "Animes" :
+                            bottomBarSelectedIndex == 1 ? "Movies" : "Television Shows");
+            for (int a = 0; a < tasks.size(); a++) {
+                tasks.get(a).setId(0);
+            }
+            DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                    .taskDao().deleteAll(bottomBarSelectedIndex == 0 ? "Animes" :
+                    bottomBarSelectedIndex == 1 ? "Movies" : "Television Shows");
+            DatabaseClient.getInstance(getApplicationContext()).getAppDatabase()
+                    .taskDao().insertAll(tasks);
         });
     }
 
