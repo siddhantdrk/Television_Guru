@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 
+# Okay
+
+# It was not expected !!
+
 ##############################################################################
 ##
 ##  Gradle start up script for UN*X
